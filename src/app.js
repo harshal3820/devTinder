@@ -2,38 +2,30 @@ const express = require('express');
 
 const app = express();
 
-// /ac, /abc will be handled
-// app.get(/^\/ab?c$/, (req, res) =>{
-//     res.send({firstName: "Harshal", lastName: "Patil"})
-// })
-
-// // /abc, /abbc, /abbbbbbbbbbbbbbbbbbc will be handled
-// app.get(/^\/ab+c$/, (req, res) =>{
-//     res.send({firstName: "Harshal", lastName: "Patil"})
-// })
-
-// // /acd, /abcd, /abbbcd, /abbbbbbbbbbbbbbbbc will be handled
-// app.get(/^\/ab*cd$/, (req, res) =>{
-//     res.send({firstName: "Harshal", lastName: "Patil"})
-// })
-
-// app.get(/^\/a(bc)+d$/, (req, res) =>{
-//     res.send({firstName: "Harshal", lastName: "Patil"})
-// })
-
-app.get(/^\/.*fly$/, (req, res) =>{
-    res.send({firstName: "Harshal", lastName: "Patil"})
-})
-
-//This will only handle GET call to /user
-app.get("/user/:userId/:name/:password", (req, res) => {
-    // console.log(req.query);
-    console.log(req.params)
-    res.send({firstName: "Harshal", lastName: "Patil"});
-})
-
-app.use("/hello", (req, res) => {
-    res.send("Hello Hello Hello!")
+app.use("/user", ( req, res,next) => {
+    console.log("User Route");
+    // res.send("route handler 1")
+    next();
+},
+[(req, res, next) => {
+    console.log("User Route 2");
+    // res.send("route handler 2")
+    next();
+},
+(req, res, next) => {
+    console.log("User Route 3");
+    // res.send("route handler 3");
+    next();
+}],
+(req, res, next) => {
+    console.log("User Route 4");
+    // res.send("route handler 4");
+    next();
+},
+(req, res, next) => {
+    console.log("User Route 5");
+    res.send("route handler 5");
+    next();
 })
 
 app.listen(7000, () => {
