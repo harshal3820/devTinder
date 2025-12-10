@@ -29,4 +29,20 @@
 - next()
 - next function and error along with res.send()
 - app.use("/user", rH, [rH2, rH3], rH4, rH5)
+- What is middleware? why do we need it
+- How express js basically handles the requests behind the scenes
+- Difference app.use and app.all
+- Write a dummy auth middleware for admin
+- Write a dummy auth middleware for all users routes , except /user/login 
+- Error handling using app.use("/",(err,req,res,next)={});
+
+
+- Create a free cluster on MongoDB official website (mongo atlas)
+- Install mongoose library  
+- Connect your application to the Database "connection-url"/devTinder
+- Call the connectDB function and connect to database before starting application on 7000
+- create a userSchema and user model
+- create POST /signup API to add data to database
+- push some documents using API calls from postman
+- Error handling using try, catch
 
