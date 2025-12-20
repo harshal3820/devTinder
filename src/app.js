@@ -4,24 +4,22 @@ const User = require('./models/user')
 
 const app = express();
 
-app.use(express.json());
+app.use(express.json()); //convert json data into js object
 
-app.post("/signup", async(req,res) => {
+app.post("/signup", async (req, res) => {
     console.log(req.body);
     // creating a new instance of an user model
     const user = new User(req.body);
 
-    try{
+    try {
         await user.save();
         res.send("USer added successfully");
     } catch (err) {
         res.status(400).send("Error saving the user:" + err.message);
     }
-
-    
 })
 
- connectDB()
+connectDB()
     .then(() => {
         console.log("Database connected successfully");
         app.listen(7000, () => {
