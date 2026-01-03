@@ -49,17 +49,17 @@ app.get("/feed", async (req, res) => {
 
 })
 
-app.patch("/user/:userId", async(req, res) => {
+app.patch("/user/:userId", async (req, res) => {
     const userId = req.params?.userId;
     const data = req.body;
 
-    try{
+    try {
         const UPDATES_ALLOWED = ["firstName", "lastName", "age", "gender", "photoUrl", "about", "skills",];
         const isUpdateAllowed = Object.keys(data).every((k) => UPDATES_ALLOWED.includes(k));
-        if(!isUpdateAllowed){
+        if (!isUpdateAllowed) {
             throw new Error("Update is not allowed");
         }
-        if((data?.skills.length > 10)){
+        if ((data?.skills.length > 10)) {
             throw new Error("Skills cannot be more than 10");
         }
         const user = await User.findByIdAndUpdate({ _id: userId }, data, {
