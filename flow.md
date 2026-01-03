@@ -70,3 +70,7 @@
 - explore validator library functions and use it for email, password, photoUrl
 - Never Trust req.body
 
+- Validate data in SignUp API
+- Install bcrypt package
+- Create PasswordHash using bcrypt.hash & save the user as incrupted password
+
