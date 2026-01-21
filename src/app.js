@@ -1,8 +1,12 @@
+require("dotenv").config({
+    path: "./src/.env",
+});
 const express = require('express');
 const { connectDB } = require('./config/db');
 const app = express();
 const coookieParser = require('cookie-parser');
 const cors = require('cors');
+
 
 app.use(cors({
     origin: 'http://localhost:5173',
@@ -25,7 +29,7 @@ app.use("/", UserRouter)
 connectDB()
     .then(() => {
         console.log("Database connected successfully");
-        app.listen(7000, () => {
+        app.listen(process.env.PORT, () => {
             console.log('Server is running on port 7000');
         });
     })
