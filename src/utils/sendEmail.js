@@ -1,34 +1,26 @@
 const { SendEmailCommand } =require ("@aws-sdk/client-ses");
 const { sesClient } = require("./sesClient.js");
 
-const createSendEmailCommand = (toAddress, fromAddress) => {
+const createSendEmailCommand = (toAddress, fromAddress, subject, body) => {
   return new SendEmailCommand({
     Destination: {
-      /* required */
-      CcAddresses: [
-        /* more items */
-      ],
-      ToAddresses: [
-        toAddress,
-        /* more To-email addresses */
-      ],
+      CcAddresses: [],
+      ToAddresses: [toAddress],
     },
     Message: {
-      /* required */
       Body: {
-        /* required */
         Html: {
           Charset: "UTF-8",
-          Data: "<h1>This is email body in HTML format.</h1>",
+          Data: `<h1>${body}</h1>`,
         },
         Text: {
           Charset: "UTF-8",
-          Data: "This is text format email",
+          Data: "This is the text format email",
         },
       },
       Subject: {
         Charset: "UTF-8",
-        Data: "Hello World from SES",
+        Data: subject,
       },
     },
     Source: fromAddress,
@@ -38,10 +30,12 @@ const createSendEmailCommand = (toAddress, fromAddress) => {
   });
 };
 
-const run = async () => {
+const run = async (subject, body) => {
   const sendEmailCommand = createSendEmailCommand(
     "harshal1232413@gmail.com",
-    "noreply@thedevtinder.co.in"
+    "noreply@thedevtinder.co.in",
+    subject,
+    body
   );
 
   try {

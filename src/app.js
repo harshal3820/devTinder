@@ -4,6 +4,7 @@ const { connectDB } = require('./config/db');
 const app = express();
 const coookieParser = require('cookie-parser');
 const cors = require('cors');
+const cronjob = require('./utils/cronjob');
 
 
 app.use(cors({
